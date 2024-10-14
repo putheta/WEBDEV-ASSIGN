@@ -10,7 +10,7 @@ const url = "https://script.googleusercontent.com/macros/echo?user_content_key=r
 const logs_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records"
 
 app.get("/",(req,res)=>{
-  res.send("Hello API World")
+  res.send("Welcome 65010646")
 })
 
 //รับ request ผ่าน body ใน bruno 
@@ -37,7 +37,7 @@ app.get("/logs" , async (req,res) => {
 
 })
 
-app.get("/config" , async (req,res)=>{
+app.get("/configs" , async (req,res)=>{
   console.log("/configs")
 
   fetch (url , {method:"GET"})
@@ -46,7 +46,7 @@ app.get("/config" , async (req,res)=>{
 
 })
 
-app.get("/config/:id" , async(req,res) => {
+app.get("/configs/:id" , async(req,res) => {
   console.log("wait for input id")
   const id = req.params.id
   const drone = await (await (await fetch(url,{method:"GET"})).json()).data

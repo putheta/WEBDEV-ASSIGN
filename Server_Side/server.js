@@ -2,6 +2,8 @@ const express = require("express")
 const app = express()
 const path = require("path");
 const PORT = 8000
+const cors = require("cors");
+app.use(cors()); 
 
 app.use(express.json())
 
@@ -58,6 +60,9 @@ app.get("/configs/:id" , async(req,res) => {
    
   myDrone.max_speed = (myDrone.max_speed == null) ? 100 : myDrone.max_speed // เป็น null มั้ย ถ้าเป็น กำหนดให้เป็น 100 else ให้มีค่าเท่าเดิม
   myDrone.max_speed = (myDrone.max_speed > 110 ) ? 110 : myDrone.max_speed // มากกว่า 110 มั้ย ถ้าเป็น กำหนดให้เป็น 110 else ให้มีค่าเท่าเดิม
+  if (!myDrone) {
+    return res.status(404).send({ error: "Drone not found" }); // ส่งค่าผลลัพธ์หากไม่พบ drone
+  }
 
   res.send(myDrone)
 })
@@ -80,3 +85,7 @@ app.get("/status/:id" , async (req,res)=>{
 app.listen(PORT,()=>{
   console.log(`Server running on port ${PORT}`)
 })
+
+app.use(cors({
+  origin: 'http://127.0.0.1:5500' // อนุญาตเฉพาะ origin นี้
+}));

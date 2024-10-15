@@ -24,7 +24,7 @@ const getconfig = async (droneID) => {
         <input class="fs-sm form-control rounded border" name="temp" type="text" placeholder="input temp" value="25">
         <label class="mt-3" for="unit">unit</label>
         <input class="fs-sm form-control rounded border" name="unit" type="text" placeholder="input temp" value="C">
-        <button class="mt-3 btn btn-sm btn-primary" type="submit">submit</button>
+        <button class="button mt-3 btn btn-sm btn-primary" type="submit">submit</button>
     `;
 
     // แสดงข้อมูล drone config
@@ -40,8 +40,8 @@ const getconfig = async (droneID) => {
     `;
 
     let logHTML = `
-    <table border="1" cellspacing="0" cellpadding="10">
-        <thead>
+    <table cellspacing="0" cellpadding="10">
+        <thead style="background-color: rgba(144, 165, 180, 0.336);">
             <tr>
                 <th>Created</th>
                 <th>Drone ID</th>

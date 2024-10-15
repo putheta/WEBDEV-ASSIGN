@@ -1,7 +1,7 @@
 console.log("test")
 
 const DRONE_ID = 65010646
-const config_url = "http://127.0.0.1:8000/configs/65010646"
+const config_url = "https://webdev-assign.onrender.com/configs/65010646"
 const log_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records" 
 
 
@@ -11,7 +11,7 @@ const getconfig = async (droneID) => {
     const jsonData = await rawData.json();
 
     // ดึง logs
-    const rawItem = await fetch("http://127.0.0.1:8000/logs");
+    const rawItem = await fetch("https://webdev-assign.onrender.com/logs");
     const jsonItem = await rawItem.json();  // แก้จาก jason() เป็น json()
 
     console.log({ jsonData });

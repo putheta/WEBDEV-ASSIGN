@@ -6,6 +6,8 @@ const cors = require("cors");
 app.use(cors()); 
 
 app.use(express.json())
+app.set('view engine', 'ejs');
+app.set('views', './views');
 
 const conver = response => response.json
 //แปลงข้อมูลที่รับมาจาก http ให้เป็น json
@@ -13,6 +15,7 @@ const url = "https://script.googleusercontent.com/macros/echo?user_content_key=r
 const logs_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records"
 
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.get("/",(req,res)=>{
   res.send("Welcome 65010646")

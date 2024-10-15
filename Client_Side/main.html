@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/waveform.js"></script>
     <style>
         body {
             margin-top: 17vh;
@@ -30,6 +31,7 @@
             box-shadow: 0 5px 10px rgba(144, 165, 180, 0.336);
             font-size: 15px;
             font-weight: 500;
+            overflow: auto;
         }
         .result p {
             font-size: 15px;
@@ -52,16 +54,25 @@
             display: flex;
             flex-wrap: wrap;
         }
+        .config {
+            min-width: 200px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="top">
+    <div class="container-flex">
         <h1>View Config</h-1>
         <div class="mb-3" id="config"> </div>
         <div class="result container-flex" id="result">waiting...</div>
     </div>
+    <div class="container-flex" >
+        <h1>View Log</h-1>
+        <div class="mb-3" id="log"> </div>
+        <div style="max-height:200px" class="result container-flex" id="result_log">waiting...</div>
+    </div>
     
-    <form class="d-flex container-flex flex-column">
+    <form id="form" class="mb-5 d-flex container-flex flex-column">
         <label class="mt-3" for="temp">Input temp</label>
         <input class="fs-sm form-control rounded border"  name="temp" type="text" placeholder="input temp" value="25" >
         <label class="mt-3" for="unit">unit</label>

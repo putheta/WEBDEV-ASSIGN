@@ -26,7 +26,7 @@ app.get("/",(req,res)=>{
 app.post("/logs" , async (req,res) => {
   console.log("posting log data")
   console.log(req.body) //print request ที่มาจาก body ตอน input ค่าใน bruno
-  const rawData = await fetch(logs_url ,{ //await คือ รอให้ fetch(คือการส่ง http request) ให้เสร็จก่อน ค่อยทำบรรทัดถัดไป
+  const rawData = await fetch("https://app-tracking.pockethost.io/api/collections/drone_logs/records" ,{ //await คือ รอให้ fetch(คือการส่ง http request) ให้เสร็จก่อน ค่อยทำบรรทัดถัดไป
     method : "POST",
     headers : {
       "Content-Type" : "application/json"

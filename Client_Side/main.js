@@ -2,7 +2,7 @@ console.log("test")
 
 const DRONE_ID = 65010646;
 const config_url = "https://webdev-assign.onrender.com/configs/65010646";
-const log_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records";
+const log_url = "https://webdev-assign.onrender.com/logs";
 
 // เพิ่มฟังก์ชันสำหรับการส่งข้อมูลเมื่อมีการ submit
 document.getElementById('form').addEventListener('submit', async function(event) {
@@ -29,7 +29,7 @@ document.getElementById('form').addEventListener('submit', async function(event)
     };
 
     try {
-        const response = await fetch(log_url, {
+        const response = await fetch("https://app-tracking.pockethost.io/api/collections/drone_logs/records", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

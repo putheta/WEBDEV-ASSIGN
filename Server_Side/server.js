@@ -71,6 +71,16 @@ app.get("/configs/:id" , async(req,res) => {
   res.send(myDrone)
 })
 
+app.get("/logs/:id" , async(req,res) => {
+  console.log("wait for input id")
+  const id = req.params.id
+  const drone = await (await (await fetch(logs_url,{method:"GET"})).json()).items
+  const myDrone = drone.find(data => data.drone_id == id)
+  console.log(myDrone)
+
+  res.send(myDrone)
+})
+
 app.get("/status/:id" , async (req,res)=>{
   console.log("status-id")
   const id = req.params.id

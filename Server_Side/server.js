@@ -43,9 +43,7 @@ app.get("/logs", async (req, res) => {
   try {
       const response = await fetch(logs_url, { method: "GET" });
       const jsonData = await response.json();
-
-      // จัดเรียงข้อมูล logs ตามวันที่ 'created' หรือ 'updated'
-      new Date(a.updated) - new Date(b.updated)
+      const sortedLogs = jsonData.items.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
       // ส่งข้อมูลที่จัดเรียงกลับไปยังไคลเอนต์
       res.send(sortedLogs);

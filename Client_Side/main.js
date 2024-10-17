@@ -6,54 +6,53 @@ const log_url = "https://webdev-assign.onrender.com/logs";
 
 // เพิ่มฟังก์ชันสำหรับการส่งข้อมูลเมื่อมีการ submit
 document.getElementById('form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
+    event.preventDefault(); // Prevent default form submission
 
-    // ดึงค่าจาก input
     const tempValue = document.querySelector('input[name="temp"]').value;
     const unitValue = document.querySelector('input[name="unit"]').value;
     const currentDate = new Date().toISOString();
 
-    // สร้าง payload ที่จะส่งไปยังเซิร์ฟเวอร์
+    // Prepare the data payload
     const data = {
-
         "celsius": tempValue,
-        "collectionId": "ra4yr307291j38v",
+        "collectionId": "ra4yr307291j38v",  // Assuming this stays the same
         "collectionName": "drone_logs",
         "country": "Thailand",
-        "created": "2024-10-07 11:15:07.446Z",
-        "drone_id": DRONE_ID,
-        "drone_name": "Punyaruethai",
-        "id": "jfpcv9pi20amhpv",
-        "updated": currentDate
-
+        "created": currentDate,  // Use the current date for creation
+        "drone_id": DRONE_ID,   // This should be your drone ID
+        "drone_name": "Punyaruethai",  // Your drone name
+        "updated": currentDate   // Also update this with the current time
     };
 
     try {
+        // Perform the POST request
         const response = await fetch("https://app-tracking.pockethost.io/api/collections/drone_logs/records", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data)  // Stringify the payload for the request
         });
-    
-        // ตรวจสอบว่า response เป็น JSON หรือไม่
-        const resultText = await response.text();
-        try {
-            const result = JSON.parse(resultText);
-            console.log(result);  // แสดงผลเมื่อเป็น JSON
-        } catch (error) {
-            console.log(resultText);  // แสดงข้อความเมื่อไม่เป็น JSON
+
+        if (!response.ok) {
+            // If response is not OK, log the error
+            const errorDetails = await response.text();
+            console.error('Error details:', errorDetails);
+            throw new Error('Network response was not ok');
         }
-    
-        // อัปเดตการแสดงผลหลังจากการส่งข้อมูลสำเร็จ
-        console.log("submitted complete");
-        console.log(currentDate);
+
+        const result = await response.json();  // Parse the JSON response
+        console.log("Submission successful:", result);  // Log the successful result
+        console.log("Submitted at:", currentDate);
+        location.reload(); 
+
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error during POST request:', error);  // Log any errors
     }
     
 });
+
+
 
 const getconfig = async (droneID) => {
     const rawData = await fetch(config_url);

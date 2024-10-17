@@ -36,14 +36,23 @@ document.getElementById('form').addEventListener('submit', async function(event)
             },
             body: JSON.stringify(data)
         });
-
-        const result = await response.json();
-
+    
+        // ตรวจสอบว่า response เป็น JSON หรือไม่
+        const resultText = await response.text();
+        try {
+            const result = JSON.parse(resultText);
+            console.log(result);  // แสดงผลเมื่อเป็น JSON
+        } catch (error) {
+            console.log(resultText);  // แสดงข้อความเมื่อไม่เป็น JSON
+        }
+    
         // อัปเดตการแสดงผลหลังจากการส่งข้อมูลสำเร็จ
-        console.log("submitted complete")
+        console.log("submitted complete");
+        console.log(currentDate);
     } catch (error) {
         console.error('Error:', error);
     }
+    
 });
 
 const getconfig = async (droneID) => {

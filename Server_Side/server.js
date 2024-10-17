@@ -37,14 +37,24 @@ app.post("/logs" , async (req,res) => {
 
 })
 
-app.get("/logs" , async (req,res) => {
+app.get("/logs", async (req, res) => {
   console.log("/logs");
+  
+  try {
+      const response = await fetch(logs_url, { method: "GET" });
+      const jsonData = await response.json();
 
-  fetch (logs_url , {method:"GET"})
-  .then(rawData => rawData.json())
-  .then(jsonData => res.send(jsonData.items))
+      // จัดเรียงข้อมูล logs ตามวันที่ 'created' หรือ 'updated'
+      const sortedLogs = jsonData.items.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
-})
+      // ส่งข้อมูลที่จัดเรียงกลับไปยังไคลเอนต์
+      res.send(sortedLogs);
+  } catch (error) {
+      console.error('Error fetching logs:', error);
+      res.status(500).send('Error fetching logs');
+  }
+});
+
 
 app.get("/configs" , async (req,res)=>{
   console.log("/configs")

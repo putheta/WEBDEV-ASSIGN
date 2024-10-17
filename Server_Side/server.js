@@ -43,10 +43,9 @@ app.get("/logs", async (req, res) => {
   try {
       const response = await fetch(logs_url, { method: "GET" });
       const jsonData = await response.json();
-      const sortedLogs = jsonData.items.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
       // ส่งข้อมูลที่จัดเรียงกลับไปยังไคลเอนต์
-      res.send(sortedLogs);
+      res.send(jsonData.items);
   } catch (error) {
       console.error('Error fetching logs:', error);
       res.status(500).send('Error fetching logs');

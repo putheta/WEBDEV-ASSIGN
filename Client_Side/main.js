@@ -2,7 +2,7 @@ console.log("test")
 
 const DRONE_ID = 65010646;
 const config_url = "https://webdev-assign.onrender.com/configs/65010646";
-const log_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records";
+const log_url = "https://webdev-assign.onrender.com/logs";
 
 // เพิ่มฟังก์ชันสำหรับการส่งข้อมูลเมื่อมีการ submit
 document.getElementById('form').addEventListener('submit', async function(event) {
@@ -11,18 +11,21 @@ document.getElementById('form').addEventListener('submit', async function(event)
     // ดึงค่าจาก input
     const tempValue = document.querySelector('input[name="temp"]').value;
     const unitValue = document.querySelector('input[name="unit"]').value;
+    const currentDate = new Date().toISOString();
 
     // สร้าง payload ที่จะส่งไปยังเซิร์ฟเวอร์
     const data = {
+
+        "celsius": tempValue,
+        "collectionId": "ra4yr307291j38v",
+        "collectionName": "drone_logs",
+        "country": "Thailand",
+        "created": "2024-10-07 11:15:07.446Z",
         "drone_id": DRONE_ID,
-        "drone_name": "Deliberate Drive",
-        "condition": "bad",
-        "light": "on",
-        "max_speed": 45,
-        "country": "Brazil",
-        "population": 211998573,
-        "temp": tempValue,
-        "unit": unitValue
+        "drone_name": "Punyaruethai",
+        "id": "jfpcv9pi20amhpv",
+        "updated": currentDate
+
     };
 
     try {
@@ -37,10 +40,9 @@ document.getElementById('form').addEventListener('submit', async function(event)
         const result = await response.json();
 
         // อัปเดตการแสดงผลหลังจากการส่งข้อมูลสำเร็จ
-        document.getElementById('result_log').innerHTML = `<p>Log Submitted: ${JSON.stringify(result)}</p>`;
+        console.log("submitted complete")
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById('result_log').innerHTML = `<p>Error: ${error.message}</p>`;
     }
 });
 
@@ -54,6 +56,8 @@ const getconfig = async (droneID) => {
 
     console.log({ jsonData });
     console.log({ jsonItem });  // ตรวจสอบข้อมูล logs
+
+    jsonItem.sort((a, b) => new Date(b.updated) - new Date(a.updated));
 
     // แสดงข้อมูล config
     document.getElementById("config").innerHTML = '';

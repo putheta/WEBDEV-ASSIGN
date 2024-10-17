@@ -12,7 +12,7 @@ app.set('views', './views');
 const conver = response => response.json
 //แปลงข้อมูลที่รับมาจาก http ให้เป็น json
 const url = "https://script.googleusercontent.com/macros/echo?user_content_key=rNFw9TAGg3jKyWpkpjSThCIOezgdmWJDZEP9m7DHLlWi_onPKOvkGyJPeQ48fPBfB1kPq9x_M1NlqU4Ec1KRdasefZIL4GHXm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnOQwROx_Wq-O5wsPy5w5JUsdPdcpj8TWgjjVAuN4sDTiMrnThHKU7n7LmNcslGllO5_ldGegmAJuXjfvqC1tFaecv-CYmXuM6Nz9Jw9Md8uu&lib=M9_yccKOaZVEQaYjEvK1gClQlFAuFWsxN"
-const logs_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records?page=15s"
+const logs_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records?page=15"
 
 app.use(express.static(path.join(__dirname, 'public')));
 

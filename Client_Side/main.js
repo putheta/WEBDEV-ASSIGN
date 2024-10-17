@@ -1,10 +1,48 @@
 console.log("test")
 
-const DRONE_ID = 65010646
-const config_url = "https://webdev-assign.onrender.com/configs/65010646"
-const log_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records" 
+const DRONE_ID = 65010646;
+const config_url = "https://webdev-assign.onrender.com/configs/65010646";
+const log_url = "https://app-tracking.pockethost.io/api/collections/drone_logs/records";
 
+// เพิ่มฟังก์ชันสำหรับการส่งข้อมูลเมื่อมีการ submit
+document.getElementById('form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // ป้องกันการส่งฟอร์มแบบปกติ
 
+    // ดึงค่าจาก input
+    const tempValue = document.querySelector('input[name="temp"]').value;
+    const unitValue = document.querySelector('input[name="unit"]').value;
+
+    // สร้าง payload ที่จะส่งไปยังเซิร์ฟเวอร์
+    const data = {
+        "drone_id": DRONE_ID,
+        "drone_name": "Deliberate Drive",
+        "condition": "bad",
+        "light": "on",
+        "max_speed": 45,
+        "country": "Brazil",
+        "population": 211998573,
+        "temp": tempValue,
+        "unit": unitValue
+    };
+
+    try {
+        const response = await fetch(log_url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        // อัปเดตการแสดงผลหลังจากการส่งข้อมูลสำเร็จ
+        document.getElementById('result_log').innerHTML = `<p>Log Submitted: ${JSON.stringify(result)}</p>`;
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('result_log').innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+});
 
 const getconfig = async (droneID) => {
     const rawData = await fetch(config_url);
@@ -51,42 +89,41 @@ const getconfig = async (droneID) => {
             </tr>
         </thead>
         <tbody>
-`;
-
-jsonItem.forEach((item) => {
-    logHTML += `
-        <tr>
-            <td>${item.created}</td>
-            <td>${item.drone_id}</td>
-            <td>${item.drone_name}</td>
-            <td>${item.celsius}</td>
-            <td>${item.country}</td>
-        </tr>
     `;
-});
 
-logHTML += `
-        </tbody>
-    </table>
-`;
+    jsonItem.forEach((item) => {
+        logHTML += `
+            <tr>
+                <td>${item.created}</td>
+                <td>${item.drone_id}</td>
+                <td>${item.drone_name}</td>
+                <td>${item.celsius}</td>
+                <td>${item.country}</td>
+            </tr>
+        `;
+    });
 
-document.getElementById("result_log").innerHTML = logHTML;
+    logHTML += `
+            </tbody>
+        </table>
+    `;
 
+    document.getElementById("result_log").innerHTML = logHTML;
 };
 
 const displayWaiting = () => {
-    const html = `<p>Drone ID : ${DRONE_ID}</p>`
-    document.getElementById("config").innerHTML = html
-    document.getElementById("log").innerHTML = html
+    const html = `<p>Drone ID : ${DRONE_ID}</p>`;
+    document.getElementById("config").innerHTML = html;
+    document.getElementById("log").innerHTML = html;
     document.getElementById("form").innerHTML = `
-<l-waveform
-  size="35"
-  stroke="3.5"
-  speed="1"
-  color="black" 
-></l-waveform>`
-    console.log("wait")
-}
+    <l-waveform
+      size="35"
+      stroke="3.5"
+      speed="1"
+      color="black" 
+    ></l-waveform>`;
+    console.log("wait");
+};
 
-displayWaiting()
-getconfig(DRONE_ID)
+displayWaiting();
+getconfig(DRONE_ID);

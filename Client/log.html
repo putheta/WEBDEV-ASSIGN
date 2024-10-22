@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOG</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/waveform.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        nav {
+            width: 100%;
+            margin-bottom: 20px;
+            margin-top: 50px;
+            border-radius: 10px;
+            padding-inline: 20px;
+            padding-block: 10px;
+            border: 1px solid rgba(110, 117, 121, 0.363);
+            box-shadow: 0 5px 10px rgba(144, 165, 180, 0.336);
+            font-size: 15px;
+            font-weight: 500;
+            top: 0px;
+            position: fixed;
+            z-index: 1000px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .result {
+            padding-inline: 50px;
+            padding-block: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(110, 117, 121, 0.363);
+            box-shadow: 0 5px 10px rgba(144, 165, 180, 0.336);
+            font-size: 15px;
+            font-weight: 500;
+            max-width: 100%;
+            overflow: auto;
+            margin-top: 15px;
+        }
+        .result p {
+            font-size: 15px;
+            font-weight: normal;
+        }
+        button {
+            align-self: center;
+            width: 100%;
+        }
+        p{
+            margin: 0;
+            padding: 3px;
+            font-size: 10px;
+            
+        }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        #form {
+            padding-inline: 25vw;
+            transform: translateY(-7vh);
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="w-25 container d-flex justify-content-around align-items-center">
+        <a  href="main-temp.html">Config</a>
+        <a href="temp.html">Temp</a>
+        <a style="text-decoration: underline;" >Logs</a>
+    </nav>
+    <div id="loading"></div>
+    <div id="log" style="flex-wrap: wrap;" class="container-flex" >
+        <h1>View Log</h-1>
+        <div style="max-height:400px" class="result container-flex" id="result_log">waiting...</div>
+    </div>
+    
+    
+    <script src="log.js"></script>
+</body>
+</html>

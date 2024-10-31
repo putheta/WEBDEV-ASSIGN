@@ -7,8 +7,6 @@ const log_url = "https://webdev-assign.onrender.com/logs";
 // เพิ่มฟังก์ชันสำหรับการส่งข้อมูลเมื่อมีการ submit
 document.getElementById('form').addEventListener('submit', async function(event) {
     console.log("testtt")
-    document.getElementById("form").innerHTML =　""
-    document.getElementById("complete").style.display = "block"
     event.preventDefault(); // Prevent default form submission
 
     const tempValue = document.querySelector('input[name="temp"]').value;
@@ -58,7 +56,6 @@ document.getElementById('form').addEventListener('submit', async function(event)
 
 
 const getconfig = async (droneID) => {
-    document.getElementById("complete").style.display = "none"
     document.getElementById("loading").style.display = "none"
     document.getElementById("form").innerHTML = `
         <label class="mt-3" for="temp">Input temp</label>

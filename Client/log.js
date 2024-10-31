@@ -50,7 +50,7 @@ const getconfig = async (droneID) => {
     `;
 
     document.getElementById("result_log").innerHTML = logHTML;
-    document.getElementById("loading").style.display="none"
+        document.getElementById("loading").style.display="none"
     document.getElementById("log").style.display="block"
 };
 

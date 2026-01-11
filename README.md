@@ -2,3 +2,4 @@
 ### contains of 
 - Frontend : HTML, CSS
 - Backend : Node.js
+- Deployment : Render.com
